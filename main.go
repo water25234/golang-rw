@@ -31,7 +31,8 @@ func main() {
 		},
 	}
 
-	rw.IsStopTransactionQueryToWrite = true
+	// If you want to transaction query that the write for data, default false.
+	// rw.IsCloseTransactionQueryToWrite = true
 
 	db, err := rw.Open("postgres", driverDBSource)
 	checkError(err)
@@ -76,7 +77,6 @@ func queryInventory() {
 	rows, err := db.Query(sql_query)
 	checkError(err)
 
-	// Read rows from table.
 	var id int
 	var name string
 	var quantity int
@@ -96,17 +96,14 @@ func queryInventory() {
 }
 
 func createInventory() {
-	// Drop previous table of same name if one exists.
 	_, err = db.Exec("DROP TABLE IF EXISTS inventory;")
 	checkError(err)
 	fmt.Println("Finished dropping table (if existed)")
 
-	// Create table.
 	_, err = db.Exec("CREATE TABLE inventory (id serial PRIMARY KEY, name VARCHAR(50), quantity INTEGER);")
 	checkError(err)
 	fmt.Println("Finished creating table")
 
-	// Insert some data into table.
 	sql_statement := "INSERT INTO inventory (name, quantity) VALUES ($1, $2);"
 	_, err = db.Exec(sql_statement, "banana", 150)
 	checkError(err)

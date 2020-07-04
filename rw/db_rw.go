@@ -8,7 +8,7 @@ import (
 var tx *sql.Tx
 var err error
 var isTransaction bool = false
-var IsStopTransactionQueryToWrite bool = false
+var IsCloseTransactionQueryToWrite bool = false
 
 type DriverDBSource struct {
 	WRITE DBConfig
@@ -81,7 +81,7 @@ func (db *DBExecute) Exec(query string, args ...interface{}) (sql.Result, error)
 }
 
 func (db *DBExecute) Begin() (*sql.Tx, error) {
-	if IsStopTransactionQueryToWrite == true {
+	if IsCloseTransactionQueryToWrite == false {
 		isTransaction = true
 	}
 
