@@ -12,10 +12,10 @@ $ go get github.com/water25234/golang-rw
 ```go
 go run main.go
 
-  	// create table Inventory()
-  	createInventory()
+	// create table Inventory()
+	createInventory()
 
-    // add postgresql config driver parameters
+	// add postgresql config driver parameters
 	driverDBSource := rw.DriverDBSource{
 		WRITE: rw.DBConfig{
 			HOST:     "127.0.0.1",
@@ -33,14 +33,14 @@ go run main.go
 		},
 	}
 
-    // If you want to transaction query that the write for data, default false.
+	// If you want to transaction query that the write for data, default false.
 	// rw.IsCloseTransactionQueryToWrite = true
 
-    // connection DB & test ping 
+	// connection DB & test ping 
 	db, err := rw.Open("postgres", driverDBSource)
 	checkError(err)
   
-    // Query data
+	// Query data
 	var id int
 	var name string
 	var quantity int
@@ -49,13 +49,13 @@ go run main.go
 	checkError(err)
 	fmt.Println("Data row = (%d, %s, %d)\n", id, name, quantity)
 
-    // insert data
+	// insert data
 	sql := "INSERT INTO inventory (name, quantity) VALUES ($1, $2);"
 	_, err = db.Exec(sql, "coconut", 300)
 	checkError(err)
 	fmt.Println("Inserted 1 rows of data")
 
-    // start Transaction
+	// start Transaction
 	tx, err := db.Begin()
 	checkError(err)
 
