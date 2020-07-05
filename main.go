@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"../golang_rw/rw"
+	"github.com/water25234/golang-rw/rw"
 
 	_ "github.com/lib/pq"
 )
