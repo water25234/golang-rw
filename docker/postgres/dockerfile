@@ -1,0 +1,7 @@
+FROM postgres:alpine
+
+RUN apk update; apk add aria2;
+
+CMD ["postgres"]
+
+EXPOSE 5432

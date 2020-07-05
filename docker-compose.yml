@@ -1,0 +1,43 @@
+version: '3'
+
+networks:
+    backend:
+      driver: bridge
+
+services:
+    golang:
+        build:
+            context: .
+            dockerfile: dockerfile
+        volumes:
+            - ./logs/golang:/var/lib/log/golang
+        ports:
+            - "8080:8080"
+        restart: unless-stopped
+        networks:
+            - backend
+        #depends_on: 
+        #    - redis
+        #    - postgres
+
+    postgres:
+        build:
+            context: ./docker/postgres
+        volumes:
+            - ../golangDB/data/db/postgres:/var/lib/database/postgresql/
+            - ./logs/postgres:/var/lib/log/postgres
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_DB=golangdb
+            - POSTGRES_USER=golang
+            - POSTGRES_PASSWORD=golang
+        networks:
+            - backend
+
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        networks:
+            - backend
