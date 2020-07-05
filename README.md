@@ -12,6 +12,12 @@ $ go get github.com/water25234/golang-rw
 ```go
 go run main.go
 
+import (
+	"database/sql"
+	"github.com/water25234/golang-rw/rw"
+	_ "github.com/lib/pq"
+)
+
 	// create table Inventory()
 	createInventory()
 
