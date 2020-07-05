@@ -40,7 +40,7 @@ go run main.go
 	db, err := rw.Open("postgres", driverDBSource)
 	checkError(err)
   
-  	defer rw.Close()
+  	defer db.Close()
   
   
 	// Query data
