@@ -40,6 +40,9 @@ go run main.go
 	db, err := rw.Open("postgres", driverDBSource)
 	checkError(err)
   
+  	defer rw.Close()
+  
+  
 	// Query data
 	var id int
 	var name string
