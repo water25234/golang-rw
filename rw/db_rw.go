@@ -28,6 +28,11 @@ type DBExecute struct {
 	READ  *sql.DB
 }
 
+type DBExecuteMulti struct {
+	WRITE *sql.DB
+	READ  []*sql.DB
+}
+
 type DriverConfig struct {
 	DriverName     string
 	DriverDBSource DriverDBSource
